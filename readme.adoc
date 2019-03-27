@@ -1,0 +1,9 @@
+= Docker - Spring Actuator
+
+This is a simple POC for:
+
+* docker
+* docker-compose
+* spring actuator
+
+
