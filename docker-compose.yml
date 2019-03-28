@@ -30,3 +30,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - '8081:8081'
+  actuator-client-multi:
+    environment:
+      - DOCKER_PORT=8082
+      - DOCKER_AC_SERVER=http://actuator-server:8888
+      - DOCKER_AC_CLIENT=http://actuator-client-multi:8082
+    build:
+      context: ./docker-actuator-client-multi
+      dockerfile: Dockerfile
+    ports:
+      - '8082:8082'

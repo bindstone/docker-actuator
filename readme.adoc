@@ -34,6 +34,11 @@ OUTSIDE BUILD: In this approach the base image is [openjdk:8-jdk-alpine]. During
 image, only the artifact docker-actuator-client.jar will be copied in the image. This requires a preprocess
 by the developer or building tools like Jenkins to execute the maven build outside.
 
+docker-actuator-client-multi
+
+MULTI STEP BUILD: In this approach the build is done on the correct way, using a first step to creating the
+artifacts and a second step copying only the generated file in the final instance.
+
 == Results
 
 When starting the docker-compose you should access to the different server and clients.
@@ -43,12 +48,13 @@ Rest request:
 * Server:  http://127.0.0.1:8888/hello[]
 * Client1: http://127.0.0.1:8080/hello[]
 * Client2: http://127.0.0.1:8081/hello[]
+* Client-Multi: http://127.0.0.1:8082/hello[]
 
 Also accessing to Actuator: http://127.0.0.1:8888/#/wallboard[]
 
 image:https://github.com/bindstone/docker-actuator/blob/master/screenshots/actuator-wallboard.png[]
 
-Shows you two running services, and the client has currently 2 running instances:
+Shows you tree running services, and one client has currently 2 running instances and for the multi step build a separate.
 
 and you can click on the services to get more details like:
 

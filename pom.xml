@@ -18,5 +18,6 @@
    <modules>
       <module>docker-actuator-server</module>
       <module>docker-actuator-client</module>
+      <module>docker-actuator-client-multi</module>
    </modules>
 </project>
