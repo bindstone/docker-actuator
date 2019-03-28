@@ -6,4 +6,64 @@ This is a simple POC for:
 * docker-compose
 * spring actuator
 
+== Install and run
 
+* Download the source file from GITHUB: git clone https://github.com/bindstone/docker-actuator.git
+
+* Build it with: mvn clean install
+
+* Run it with: docker-compose --build up
+
+== Testing approaches
+
+docker-actuator-server
+
+INSIDE BUILD: In this approach the base image is [maven:3.6-jdk-8-alpine]. It contains next to the JDK
+also the Maven tools. During the process to build the image, Docker will copy source in the image, download
+all Maven dependencies in the image repository, build the artifacts and start the server.
+
+The image itself is bigger in size, as the dependency objects are multiple time in the image present:
+* maven repository,
+* maven build jar,
+* maven build jar with tomcat
+* ...
+
+docker-actuator-client
+
+OUTSIDE BUILD: In this approach the base image is [openjdk:8-jdk-alpine]. During the process to build the
+image, only the artifact docker-actuator-client.jar will be copied in the image. This requires a preprocess
+by the developer or building tools like Jenkins to execute the maven build outside.
+
+== Results
+
+When starting the docker-compose you should access to the different server and clients.
+
+Rest request:
+
+* Server:  http://127.0.0.1:8888/hello[]
+* Client1: http://127.0.0.1:8080/hello[]
+* Client2: http://127.0.0.1:8081/hello[]
+
+Also accessing to Actuator: http://127.0.0.1:8888/#/wallboard[]
+
+image:https://github.com/bindstone/docker-actuator/blob/master/screenshots/actuator-wallboard.png[]
+
+Shows you two running services, and the client has currently 2 running instances:
+
+and you can click on the services to get more details like:
+
+image:https://github.com/bindstone/docker-actuator/blob/master/screenshots/actuator-details.png[]
+
+== Links
+
+=== Docker
+
+https://docs.docker.com/[]
+
+=== Spring Actuator
+
+https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready.html[]
+
+https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready-endpoints[]
+
+https://github.com/codecentric/spring-boot-admin[]
